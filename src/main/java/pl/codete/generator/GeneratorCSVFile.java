@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package pl.codete.generator;
 
 import au.com.bytecode.opencsv.CSVWriter;
@@ -19,7 +15,6 @@ import java.util.Random;
 
 public class GeneratorCSVFile implements FileGenerator{
   
-  public final static String HEADER = "kwota;data";
   public final static String FILE_NAME = "c:/test/yourfile5.csv";
   public final static String SEPARATOR = ";";
   public final static String NEW_LINE = "\n";
@@ -54,7 +49,7 @@ public class GeneratorCSVFile implements FileGenerator{
     return randomCost.toString();
   }
   
-  public String generateRandomDateWithoudCalendar(){
+  public String generateRandomDateSimple(){
     int min = 1;
     int max = 31;
     int result = min + (int)(Math.random() * ((max - min) + 1));
@@ -84,14 +79,12 @@ public class GeneratorCSVFile implements FileGenerator{
   @Override
   public void generatorContentCSVFile(int rows, String fileName) throws IOException{
     FileWriter writer = new FileWriter(fileName);
-//       writer.append(HEADER);
-//       writer.append(NEW_LINE);
 
        for(int x=1; x<=rows; x++){
          writer.append(generateRandomCost());
          writer.append(SEPARATOR);
 //         writer.append(generateRandomDate());
-         writer.append(generateRandomDateWithoudCalendar());
+         writer.append(generateRandomDateSimple());
          writer.append('\n');
 
        }
