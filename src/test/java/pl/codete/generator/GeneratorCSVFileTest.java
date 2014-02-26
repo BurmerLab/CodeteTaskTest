@@ -55,7 +55,7 @@ public class GeneratorCSVFileTest {
   public void testGenerateRandomDateSimple() {
     System.out.println("generateRandomDateSimple");
     GeneratorCSVFile instance = new GeneratorCSVFile();
-    String result = instance.generateRandomDateSimple();
+    String result = instance.generateRandomDate();
     assertNotNull(result);
   }
 
@@ -72,7 +72,7 @@ public class GeneratorCSVFileTest {
     System.out.println("randBetween");
     int start = 1;
     int end = 30;
-    int result = GeneratorCSVFile.randBetween(start, end);
+    int result = GeneratorCSVFile.randomNumberBetween(start, end);
     assertNotNull(result);
   }
 }

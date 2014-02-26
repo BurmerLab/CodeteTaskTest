@@ -1,6 +1,5 @@
 package pl.codete.generator;
 
-import au.com.bytecode.opencsv.CSVWriter;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.math.BigDecimal;
@@ -20,21 +19,18 @@ public class GeneratorCSVFile implements FileGenerator{
   public final static String NEW_LINE = "\n";
   
   public static void main(String [] args) throws IOException, InterruptedException{
-    generateCSVFileWithRandomValues();    
+    generateCSVFileWithRandomValues(3);    
   }
 
-  public static void generateCSVFileWithRandomValues() throws IOException, InterruptedException {
+  public static void generateCSVFileWithRandomValues(int filesCount) throws IOException, InterruptedException {
     final int minimum = 1;
-    final int maxRowsInFile = 100000;
     final int maxMillisekunds = 999;
-    int filesCount = 1;
-    int rowCounts = generateRandomNumber(minimum, maxRowsInFile); 
     int timeSleepBetweenFilesSaved = generateRandomNumber(minimum, maxMillisekunds);
     
     GeneratorCSVFile generator = new GeneratorCSVFile();
     
     for(int x=1; x <= filesCount; x++){
-      generator.generatorContentCSVFile(rowCounts, "c:/task/csvFileNumer"+ x +".csv"); 
+      generator.generatorContentCSVFile("c:/task/csvFileNumer"+ x +".csv"); 
       Thread.sleep(timeSleepBetweenFilesSaved);
     }   
   }
@@ -49,21 +45,20 @@ public class GeneratorCSVFile implements FileGenerator{
     return randomCost.toString();
   }
   
-  public String generateRandomDateSimple(){
+  @Override
+  public String generateRandomDate(){
     int min = 1;
     int max = 31;
     int result = min + (int)(Math.random() * ((max - min) + 1));
     return "" + result + "/1/2013";
   }
   
-  
-  @Override
-  public String generateRandomDate(){
+  public String generateRandomCalendarDate(){
     GregorianCalendar calendar = new GregorianCalendar();
     final int JANUARY = 1;
     final int YEAR = 2013;
 
-    int dayOfMonth = randBetween(1, 30);
+    int dayOfMonth = randomNumberBetween(1, 30);
     calendar.set(calendar.YEAR, YEAR);
     calendar.set(calendar.DAY_OF_MONTH, dayOfMonth);
     calendar.set(calendar.MONTH, JANUARY);
@@ -77,14 +72,17 @@ public class GeneratorCSVFile implements FileGenerator{
   }
   
   @Override
-  public void generatorContentCSVFile(int rows, String fileName) throws IOException{
+  public void generatorContentCSVFile( String fileName) throws IOException{
     FileWriter writer = new FileWriter(fileName);
-
-       for(int x=1; x<=rows; x++){
+    final int minimum = 1;
+    final int maxRowsInFile = 100000;
+    int rowCounts = generateRandomNumber(minimum, maxRowsInFile);
+    
+       for(int x=1; x <= rowCounts; x++){
          writer.append(generateRandomCost());
          writer.append(SEPARATOR);
 //         writer.append(generateRandomDate());
-         writer.append(generateRandomDateSimple());
+         writer.append(generateRandomDate());
          writer.append('\n');
 
        }
@@ -92,7 +90,7 @@ public class GeneratorCSVFile implements FileGenerator{
        writer.close();
   }
   
-  public static int randBetween(int start, int end) {
+  public static int randomNumberBetween(int start, int end) {
     return start + (int)Math.round(Math.random() * (end - start));
   }
   
