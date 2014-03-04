@@ -7,10 +7,12 @@ import java.io.IOException;
  * @author Michał Burmer
  */
 public interface FileGenerator {
-    public String generateRandomDate();
-    
-    public void generatorContentCSVFile(String fileName) throws IOException;
-    
-    public String generateRandomCost();
   
+  public String generateRandomDate();
+
+  public void generatorContentCSVFile(String fileName) throws IOException;
+
+  public String generateRandomCost();
+
+  public void generateCSVFileWithRandomValues(int filesCount) throws IOException, InterruptedException;
 }

@@ -1,5 +1,6 @@
 package pl.codete.generator;
 
+import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.math.BigDecimal;
@@ -12,29 +13,38 @@ import java.util.Random;
  * @author Michał Burmer
  */
 
-public class GeneratorCSVFile implements FileGenerator{
+public class GeneratorCSVFileForLinux implements FileGenerator{
   
   public final static String SEPARATOR = ";";
   public final static String NEW_LINE = "\n";
-  
-//  public static void main(String [] args) throws IOException, InterruptedException{
-//    generateCSVFileWithRandomValues(3);    
-//  }
+  private final String source = "/home/codete/";
+  private final String fileName = "CSVFileNumber";
 
-  public static void generateCSVFileWithRandomValues(int filesCount) throws IOException, InterruptedException {
+  public String getSource() {
+    return source;
+  }
+  
+  public String getFileName() {
+    return fileName;
+  }
+  
+  @Override
+   public void generateCSVFileWithRandomValues(int filesCount) throws IOException, InterruptedException {
     final int minimum = 1;
     final int maxMillisekunds = 999;
-    int timeSleepBetweenFilesSaved = generateRandomNumber(minimum, maxMillisekunds);
-    
-    GeneratorCSVFile generator = new GeneratorCSVFile();
-    
+
+    GeneratorCSVFileForLinux generator = new GeneratorCSVFileForLinux();
+    int timeSleepBetweenFilesSaved = generator.generateRandomNumber(minimum, maxMillisekunds);
+    createDirectory();
     for(int x=1; x <= filesCount; x++){
-      generator.generatorContentCSVFile("c:/task/csvFileNumber"+ x +".csv"); 
+      
+      generator.generatorContentCSVFile(source + fileName + x +".csv");
+      //c:/task/csvFileNumber
       Thread.sleep(timeSleepBetweenFilesSaved);
     }
   }
 
-  public static int generateRandomNumber(final int minimum, final int maxRowsInFile) {
+  public int generateRandomNumber(final int minimum, final int maxRowsInFile) {
     return minimum + (int)(Math.random()*maxRowsInFile);
   }
   
@@ -71,7 +81,7 @@ public class GeneratorCSVFile implements FileGenerator{
   }
   
   @Override
-  public void generatorContentCSVFile( String fileName) throws IOException{
+  public void generatorContentCSVFile(String fileName) throws IOException{
     FileWriter writer = new FileWriter(fileName);
     final int minimum = 1;
     final int maxRowsInFile = 100000;
@@ -89,8 +99,19 @@ public class GeneratorCSVFile implements FileGenerator{
        writer.close();
   }
   
-  public static int randomNumberBetween(int start, int end) {
+  public int randomNumberBetween(int start, int end) {
     return start + (int)Math.round(Math.random() * (end - start));
+  }
+
+  public void createDirectory() {
+    File file = new File(source);
+    if (!file.exists()) {
+        if (file.mkdir()) {
+            System.out.println("Directory is created!");
+        } else {
+            System.out.println("Failed to create directory!");
+        }
+    }
   }
   
 }

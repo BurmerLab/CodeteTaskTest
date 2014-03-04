@@ -11,6 +11,11 @@
       <form action="CSVGenerateFile.jsp" method="get">
         <p>Insert number of files to generate:</p>
         <input type="text" name="count"/>
+        <p>Insert type of system you use:</p>
+        <select name="system">
+          <option>windows</option>
+          <option>linux</option>
+        </select>
         <input type="submit" value="Do Dziela"/>
       </form>
     </body>

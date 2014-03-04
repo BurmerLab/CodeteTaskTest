@@ -1,4 +1,5 @@
-<%@page import="pl.codete.generator.GeneratorCSVFile"%>
+<%@page import="pl.codete.generator.GeneratorFactory"%>
+<%@page import="pl.codete.generator.CSVActions"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -8,9 +9,13 @@
   </head>
   <body>
      <%
-    int fileNumber = Integer.parseInt(request.getParameter("count"));
-    GeneratorCSVFile.generateCSVFileWithRandomValues(fileNumber);
-    out.println("Generated number of files " + fileNumber);
+    int filesCount = Integer.parseInt(request.getParameter("count"));
+    String systemType = request.getParameter("system");
+    
+    CSVActions actions = new CSVActions(GeneratorFactory.createGenerator(systemType));
+    actions.runApplication(filesCount);
+    out.println("Generated All Files");
     %>
+    
   </body>
 </html>
