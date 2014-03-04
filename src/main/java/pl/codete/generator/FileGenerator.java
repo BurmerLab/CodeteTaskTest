@@ -4,7 +4,7 @@ import java.io.IOException;
 
 /**
  *
- * @author Michał
+ * @author Michał Burmer
  */
 public interface FileGenerator {
     public String generateRandomDate();

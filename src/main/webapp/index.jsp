@@ -8,8 +8,8 @@
         <title>Generator File</title>
     </head>
     <body>
-      <form action="CSVActionsFile.jsp" method="get">
-        <p>Wpisz liczbe plikow do wygenerowania:</p>
+      <form action="CSVGenerateFile.jsp" method="get">
+        <p>Insert number of files to generate:</p>
         <input type="text" name="count"/>
         <input type="submit" value="Do Dziela"/>
       </form>

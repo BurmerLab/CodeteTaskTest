@@ -14,13 +14,12 @@ import java.util.Random;
 
 public class GeneratorCSVFile implements FileGenerator{
   
-  public final static String FILE_NAME = "c:/test/yourfile5.csv";
   public final static String SEPARATOR = ";";
   public final static String NEW_LINE = "\n";
   
-  public static void main(String [] args) throws IOException, InterruptedException{
-    generateCSVFileWithRandomValues(3);    
-  }
+//  public static void main(String [] args) throws IOException, InterruptedException{
+//    generateCSVFileWithRandomValues(3);    
+//  }
 
   public static void generateCSVFileWithRandomValues(int filesCount) throws IOException, InterruptedException {
     final int minimum = 1;
@@ -30,9 +29,9 @@ public class GeneratorCSVFile implements FileGenerator{
     GeneratorCSVFile generator = new GeneratorCSVFile();
     
     for(int x=1; x <= filesCount; x++){
-      generator.generatorContentCSVFile("c:/task/csvFileNumer"+ x +".csv"); 
+      generator.generatorContentCSVFile("c:/task/csvFileNumber"+ x +".csv"); 
       Thread.sleep(timeSleepBetweenFilesSaved);
-    }   
+    }
   }
 
   public static int generateRandomNumber(final int minimum, final int maxRowsInFile) {
